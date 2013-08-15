@@ -34,4 +34,5 @@ FORMS    += mainwindow.ui
 LIBS += -lasound
 
 OTHER_FILES += \
-    PoubelleACode.txt
+    PoubelleACode.txt \
+    README.md
