@@ -39,7 +39,6 @@ private:
     Ui::MainWindow *ui;
 
     CMidi * m_cMidi;
-    bool clientIsOpen;
 
     int err;
     CMidiOutput * sortie;

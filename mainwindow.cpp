@@ -6,41 +6,31 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    clientIsOpen = false;
-    m_cMidi = NULL;
+    m_cMidi = new CMidi(this);
+    connect(m_cMidi,SIGNAL(systemInfoCreated()),this,SLOT(on_systemInfoCreated()));
 
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
 }
 
 void MainWindow::on_openClientButton_clicked()
 {
-    if (!clientIsOpen)
+    if (!m_cMidi->isClientOpened())
     {
-        m_cMidi = new CMidi(this);
+        m_cMidi->openClient();
         ui->clientNumberLineEdit->setText(QString::number(m_cMidi->getClientId()));
         ui->clientNameLineEdit->setText(m_cMidi->getClientName());
 
-
-        clientIsOpen = true;
-
         ui->openClientButton->setEnabled(false);
         ui->closeClientButton->setEnabled(true);
-
-        connect(m_cMidi,SIGNAL(systemInfoCreated()),this,SLOT(on_systemInfoCreated()));
     }
 }
 
 void MainWindow::on_closeClientButton_clicked()
 {
-    if (clientIsOpen)
+    if (m_cMidi->isClientOpened())
     {
         ui->curseur->setValue(0);
-        err = snd_seq_close(m_cMidi->getHandle());
-        clientIsOpen = false;
+        m_cMidi->closeClient();
+
         ui->openClientButton->setEnabled(true);
         ui->closeClientButton->setEnabled(false);
     }
@@ -48,7 +38,7 @@ void MainWindow::on_closeClientButton_clicked()
 
 void MainWindow::on_curseur_valueChanged(int value)
 {
-    if (clientIsOpen)
+    if (m_cMidi->isClientOpened())
     {
         value = value;
     }
@@ -75,5 +65,15 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_systemInfoCreated()
 {
-    ui->maxClientsLineEdit->setText("Maximum encore inconnu...");
+    int maxClient = m_cMidi->getMaxNumberClient();
+    ui->maxClientsLineEdit->setText(QString::number(maxClient));
+    int maxPort = m_cMidi->getMaxNumberPort();
+    ui->maxPortsLineEdit->setText(QString::number(maxPort));
+    int curPort = m_cMidi->getCurrentClients();
+    ui->currentClientsLineEdit->setText(QString::number(curPort));
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
 }

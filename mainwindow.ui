@@ -38,6 +38,26 @@
         <item row="0" column="1">
          <widget class="QLineEdit" name="maxClientsLineEdit"/>
         </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="maxPortsLabel">
+          <property name="text">
+           <string>Nombre de ports maximum : </string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="maxPortsLineEdit"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="currentClientsLabel">
+          <property name="text">
+           <string>Nombre de clients actuels : </string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="currentClientsLineEdit"/>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="clientTab">
