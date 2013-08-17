@@ -108,3 +108,8 @@ int CMidi::getCurrentClients()
 {
     return snd_seq_system_info_get_cur_clients(m_infoSystem);
 }
+
+int CMidi::getMaxNumberChannel()
+{
+    return snd_seq_system_info_get_channels(m_infoSystem);
+}

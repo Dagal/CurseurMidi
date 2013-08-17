@@ -41,6 +41,7 @@ public:
     int getMaxNumberClient();
     int getMaxNumberPort();
     int getCurrentClients();
+    int getMaxNumberChannel();
 
 signals:
     void clientOpened();

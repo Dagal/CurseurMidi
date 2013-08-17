@@ -71,6 +71,8 @@ void MainWindow::on_systemInfoCreated()
     ui->maxPortsLineEdit->setText(QString::number(maxPort));
     int curPort = m_cMidi->getCurrentClients();
     ui->currentClientsLineEdit->setText(QString::number(curPort));
+    int maxChan = m_cMidi->getMaxNumberChannel();
+    ui->maxChannelsLineEdit->setText(QString::number(maxChan));
 }
 
 MainWindow::~MainWindow()
