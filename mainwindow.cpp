@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     m_cMidi = new CMidi(this);
     connect(m_cMidi,SIGNAL(systemInfoCreated()),this,SLOT(on_systemInfoCreated()));
+    connect(m_cMidi,SIGNAL(clientInfoCreated()),this,SLOT(on_clientInfoCreated()));
 
 }
 
@@ -81,6 +82,12 @@ void MainWindow::on_systemInfoCreated()
     ui->inputBufferSizeLineEdit->setText(QString::number(inBuffSize));
     size_t outBuffSize = m_cMidi->getOutputBufferSize();
     ui->outputBufferSizeLineEdit->setText(QString::number(outBuffSize));
+}
+
+void MainWindow::on_clientInfoCreated()
+{
+    int curPorts = m_cMidi->getCurrentPorts();
+    ui->numberCurrentPortsLineEdit->setText(QString::number(curPorts));
 }
 
 MainWindow::~MainWindow()

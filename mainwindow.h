@@ -35,6 +35,8 @@ private slots:
 
     void on_systemInfoCreated();
 
+    void on_clientInfoCreated();
+
 private:
     Ui::MainWindow *ui;
 

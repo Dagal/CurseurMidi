@@ -25,30 +25,40 @@ void CMidi::openClient()
             emit clientOpened();
 
             snd_seq_client_info_malloc(&m_infoClient);
-            m_err = snd_seq_get_client_info(m_handle, m_infoClient);
-            if (m_err < 0)
-            {
-                QMessageBox msgBox;
-                msgBox.setText("Impossible de créer l'info client!");
-                msgBox.exec();
-
-                emit sendMidiError(m_err);
-            }
-            else emit clientInfoCreated();
+            updateInfoClient();
 
             snd_seq_system_info_malloc(&m_infoSystem);
-            m_err = snd_seq_system_info(m_handle, m_infoSystem);
-            if (m_err < 0)
-            {
-                QMessageBox msgBox;
-                msgBox.setText("Impossible de créer l'info system!");
-                msgBox.exec();
-
-                emit sendMidiError(m_err);
-            }
-            else emit systemInfoCreated();
+            updateInfoSystem();
         }
     }
+}
+
+void CMidi::updateInfoSystem()
+{
+    m_err = snd_seq_system_info(m_handle, m_infoSystem);
+    if (m_err < 0)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Impossible de créer l'info system!");
+        msgBox.exec();
+
+        emit sendMidiError(m_err);
+    }
+    else emit systemInfoCreated();
+}
+
+void CMidi::updateInfoClient()
+{
+    m_err = snd_seq_get_client_info(m_handle, m_infoClient);
+    if (m_err < 0)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Impossible de créer l'info client!");
+        msgBox.exec();
+
+        emit sendMidiError(m_err);
+    }
+    else emit clientInfoCreated();
 }
 
 bool CMidi::isClientOpened() const
@@ -76,12 +86,14 @@ void CMidi::createInputPort()
 {
     CMidiInput * cmi = new CMidiInput(this);
     m_inputPorts.append(cmi);
+    updateInfoClient();
 }
 
 void CMidi::createOutputPort()
 {
     CMidiOutput * cmo = new CMidiOutput(this);
     m_outputPorts.append(cmo);
+    updateInfoClient();
 }
 
 int CMidi::getClientId() const
@@ -132,4 +144,9 @@ size_t CMidi::getInputBufferSize() const
 size_t CMidi::getOutputBufferSize() const
 {
     return snd_seq_get_output_buffer_size(m_handle);
+}
+
+int CMidi::getCurrentPorts() const
+{
+    return snd_seq_client_info_get_num_ports(m_infoClient);
 }

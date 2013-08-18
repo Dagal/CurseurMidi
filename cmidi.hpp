@@ -28,6 +28,10 @@ private:
 
     int m_err;
 
+protected:
+    void updateInfoClient();
+    void updateInfoSystem();
+
 public:
     explicit CMidi(QObject *parent = 0); // Le constructeur, que dire de plus...
 
@@ -46,6 +50,9 @@ public:
     int getMaxNumberChannel() const;
     int getMaxNumberQueue() const;
     int getCurrentQueue() const;
+
+    // Info Client
+    int getCurrentPorts() const;
 
 signals:
     void clientOpened();
