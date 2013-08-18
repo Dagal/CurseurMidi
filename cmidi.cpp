@@ -113,3 +113,13 @@ int CMidi::getMaxNumberChannel()
 {
     return snd_seq_system_info_get_channels(m_infoSystem);
 }
+
+int CMidi::getMaxNumberQueue()
+{
+    return snd_seq_system_info_get_queues(m_infoSystem);
+}
+
+int CMidi::getCurrentQueue()
+{
+    return snd_seq_system_info_get_cur_queues(m_infoSystem);
+}

@@ -39,9 +39,11 @@ public:
 
     // Info System
     int getMaxNumberClient();
-    int getMaxNumberPort();
     int getCurrentClients();
+    int getMaxNumberPort();
     int getMaxNumberChannel();
+    int getMaxNumberQueue();
+    int getCurrentQueue();
 
 signals:
     void clientOpened();
