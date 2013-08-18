@@ -31,19 +31,21 @@ private:
 public:
     explicit CMidi(QObject *parent = 0); // Le constructeur, que dire de plus...
 
+    // Client
+    snd_seq_t * getHandle() const;
     bool isClientOpened() const; // Test du client ouvert ou non. Ne pas confondre avec le Signal...
-
-    snd_seq_t * getHandle();
-    int getClientId();
+    int getClientId() const;
     const char *getClientName() const;
+    size_t getInputBufferSize() const;
+    size_t getOutputBufferSize() const;
 
     // Info System
-    int getMaxNumberClient();
-    int getCurrentClients();
-    int getMaxNumberPort();
-    int getMaxNumberChannel();
-    int getMaxNumberQueue();
-    int getCurrentQueue();
+    int getMaxNumberClient() const;
+    int getCurrentClients() const;
+    int getMaxNumberPort() const;
+    int getMaxNumberChannel() const;
+    int getMaxNumberQueue() const;
+    int getCurrentQueue() const;
 
 signals:
     void clientOpened();
@@ -59,7 +61,6 @@ public slots:
     void closeClient();
     void createInputPort();
     void createOutputPort();
-
 };
 
 #endif // CMIDI_HPP

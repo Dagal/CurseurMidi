@@ -77,6 +77,10 @@ void MainWindow::on_systemInfoCreated()
     ui->maxQueuesLineEdit->setText(QString::number(maxQ));
     int curQ = m_cMidi->getCurrentQueue();
     ui->currentQueuesLineEdit->setText(QString::number(curQ));
+    size_t inBuffSize = m_cMidi->getInputBufferSize();
+    ui->inputBufferSizeLineEdit->setText(QString::number(inBuffSize));
+    size_t outBuffSize = m_cMidi->getOutputBufferSize();
+    ui->outputBufferSizeLineEdit->setText(QString::number(outBuffSize));
 }
 
 MainWindow::~MainWindow()
