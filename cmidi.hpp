@@ -44,15 +44,20 @@ public:
     size_t getOutputBufferSize() const;
 
     // Info System
-    int getMaxNumberClient() const;
-    int getCurrentClients() const;
-    int getMaxNumberPort() const;
-    int getMaxNumberChannel() const;
-    int getMaxNumberQueue() const;
-    int getCurrentQueue() const;
+    int getMaxNumberClients() const;
+    int getNumberClients() const;
+    int getMaxNumberPorts() const;
+    int getMaxNumberChannels() const;
+    int getMaxNumberQueues() const;
+    int getNumberQueues() const;
 
     // Info Client
-    int getCurrentPorts() const;
+    int getNumberPorts() const;
+
+    // Port
+    int getNumberInputs() const;
+    int getNumberOutputs() const;
+    QString *getOutputName(int);
 
 signals:
     void clientOpened();

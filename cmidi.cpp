@@ -106,32 +106,32 @@ const char* CMidi::getClientName() const
     return snd_seq_client_info_get_name(m_infoClient);
 }
 
-int CMidi::getMaxNumberClient() const
+int CMidi::getMaxNumberClients() const
 {
     return snd_seq_system_info_get_clients(m_infoSystem);
 }
 
-int CMidi::getMaxNumberPort() const
+int CMidi::getMaxNumberPorts() const
 {
     return snd_seq_system_info_get_ports(m_infoSystem);
 }
 
-int CMidi::getCurrentClients() const
+int CMidi::getNumberClients() const
 {
     return snd_seq_system_info_get_cur_clients(m_infoSystem);
 }
 
-int CMidi::getMaxNumberChannel() const
+int CMidi::getMaxNumberChannels() const
 {
     return snd_seq_system_info_get_channels(m_infoSystem);
 }
 
-int CMidi::getMaxNumberQueue() const
+int CMidi::getMaxNumberQueues() const
 {
     return snd_seq_system_info_get_queues(m_infoSystem);
 }
 
-int CMidi::getCurrentQueue() const
+int CMidi::getNumberQueues() const
 {
     return snd_seq_system_info_get_cur_queues(m_infoSystem);
 }
@@ -146,7 +146,24 @@ size_t CMidi::getOutputBufferSize() const
     return snd_seq_get_output_buffer_size(m_handle);
 }
 
-int CMidi::getCurrentPorts() const
+int CMidi::getNumberPorts() const
 {
     return snd_seq_client_info_get_num_ports(m_infoClient);
+}
+
+int CMidi::getNumberInputs() const
+{
+    return m_inputPorts.count();
+}
+
+int CMidi::getNumberOutputs() const
+{
+    return m_outputPorts.count();
+}
+
+QString * CMidi::getOutputName(int i)
+{
+    CMidiOutput * cmo;
+    cmo = m_outputPorts.at(i);
+    return cmo->getName();
 }

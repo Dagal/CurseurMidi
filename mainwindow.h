@@ -33,6 +33,8 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_clientOpened();
+
     void on_systemInfoCreated();
 
     void on_clientInfoCreated();
@@ -46,6 +48,9 @@ private:
     CMidiOutput * sortie;
     CMidiInput * entree;
     snd_seq_ev_ctrl_t controle;
+
+protected:
+    void updatePortTab();
 };
 
 #endif // MAINWINDOW_H
