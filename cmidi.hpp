@@ -57,6 +57,7 @@ public:
     // Port
     int getNumberInputs() const;
     int getNumberOutputs() const;
+    QString *getInputName(int);
     QString *getOutputName(int);
 
 signals:

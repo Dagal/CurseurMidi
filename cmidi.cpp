@@ -161,6 +161,13 @@ int CMidi::getNumberOutputs() const
     return m_outputPorts.count();
 }
 
+QString * CMidi::getInputName(int i)
+{
+    CMidiInput * cmi;
+    cmi = m_inputPorts.at(i);
+    return cmi->getName();
+}
+
 QString * CMidi::getOutputName(int i)
 {
     CMidiOutput * cmo;

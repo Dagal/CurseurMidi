@@ -58,6 +58,7 @@ void MainWindow::on_createInputPortButton_clicked()
     // Todo: Faire les protections
     m_cMidi->createInputPort();
     updatePortTab();
+    ui->inputPortComboBox->addItem(m_cMidi->getInputName(ui->inputPortComboBox->count())->append(""));
 }
 
 void MainWindow::on_pushButton_clicked()
